@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './TitleText.css';
+import './styles/TitleText.css';
 
 interface MessageProps{
     overdue: boolean;
@@ -20,9 +20,9 @@ export default function TitleText(props: MessageProps){
         setText(tempText);
     }, [props.overdue, props.numTasks])
     return (
-        <div className={'title-text-container'}>
-            <span className={'name-text'}>{`Hi, ${props.name}!`}</span>
-            <span className={'body-text'}>{text}</span>
+        <div className={'dashboard-section-container thirty-percent-height'}>
+            <span className={'dashboard-title-text'}>{`Hi, ${props.name}!`}</span>
+            <span className={'dashboard-body-text'}>{text}</span>
         </div>
     )
 }

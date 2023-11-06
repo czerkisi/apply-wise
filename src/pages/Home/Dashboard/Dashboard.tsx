@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
-import './Dashboard.css';
+import './styles/Dashboard.css';
 import {useAppSelector} from "../../../Redux/hooks";
 import {UserState} from "../../../Redux/Slices/userSlice";
 import Header from "../../../components/Header";
-import TitleText from "../TitleText/TitleText";
-import TaskViewer from "../TaskView/TaskViewer";
+import TitleText from "./TitleText";
+import TaskViewer from "./TaskViewer";
 import {Event} from "../../../Redux/Slices/userSlice";
+import FollowUpApplications from "./FollowUpApplications";
 
 export default function Dashboard(){
     const user = useAppSelector(state => state.user);
@@ -69,7 +70,7 @@ export default function Dashboard(){
                 </div>
                 <div className="half-screen-div">
                     <TaskViewer tasks={upcomingTasks} title={'Upcoming'} />
-
+                    <FollowUpApplications />
                 </div>
             </div>
         </div>

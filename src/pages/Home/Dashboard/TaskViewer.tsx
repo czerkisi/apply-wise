@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Event } from "../../../Redux/Slices/userSlice";
 import EventPreview from "../../../components/EventPreview";
-import './TaskViewer.css';
+import './styles/TaskViewer.css';
 
 interface MessageProps {
     tasks: Event[];
@@ -25,24 +25,24 @@ export default function TaskViewer(props: MessageProps) {
     };
 
     return (
-        <div className="task-view-container">
+        <div className="dashboard-section-container seventy-percent-height">
             {events.length > 0 ? (
-                <>
-                    <span>{`${props.title} Tasks`}</span>
+                <div>
+                    <span className={'dashboard-title-text'}>{`${props.title} Tasks`}</span>
+                    <div className="event-container">
+                        {events[currentEventIndex] && (
+                            <EventPreview event={events[currentEventIndex]}/>
+                        )}
+                    </div>
                     <button onClick={previousEvent} className="arrow-button left">
                         &lt;
                     </button>
-                    <div className="event-container">
-                        {events[currentEventIndex] && (
-                            <EventPreview event={events[currentEventIndex]} />
-                        )}
-                    </div>
                     <button onClick={nextEvent} className="arrow-button right">
                         &gt;
                     </button>
-                </>
+                </div>
             ) : (
-                <p>{`No ${props.title} Tasks`}</p>
+                <span className={'dashboard-body-text'}>{`No ${props.title} Tasks`}</span>
             )}
         </div>
     );

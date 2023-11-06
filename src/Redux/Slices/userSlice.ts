@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export interface Event {
     title: string;
@@ -21,11 +22,61 @@ export interface UserState {
     applications: Application[]; // Array of application objects
 }
 
-const initialState: UserState = {
-    token: localStorage.getItem('userToken'),
-    name: localStorage.getItem('name'),
-    applications: [],
-};
+const initialState: UserState =
+// {
+//     token: localStorage.getItem('userToken'),
+//     name: localStorage.getItem('name'),
+//     applications: [],
+// };
+{
+    name: "John Doe",
+    token: "sampleToken123",
+    applications: [
+        {
+            companyName: "Example Company",
+            jobTitle: "Software Developer",
+            events: [
+                {
+                    title: "Application Submitted",
+                    type: "A",
+                    date: 19655,
+                    complete: true
+                },
+                {
+                    title: "Phone Interview",
+                    type: "I",
+                    date: 19665,
+                    complete: false
+                }
+            ],
+            recruiterName: "Jane Smith",
+            recruiterEmail: "jane@example.com"
+        }
+    ]
+}
+// Define an async thunk for fetching applications from the backend
+export const fetchApplications = createAsyncThunk('user/fetchApplications', async (token: string) => {
+    try {
+        const response = await axios.get('/api/applications', {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return response.data.applications;
+    } catch (error) {
+        throw error;
+    }
+});
+
+// Define an async thunk for saving an application to the backend
+export const saveApplication = createAsyncThunk('user/saveApplication', async ({ token, application }: { token: string, application: Application }) => {
+    try {
+        const response = await axios.post('/api/applications', application, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return response.data.application;
+    } catch (error) {
+        throw error;
+    }
+});
 
 const userSlice = createSlice({
     name: 'user',
@@ -41,7 +92,17 @@ const userSlice = createSlice({
             state.applications.push(action.payload);
         },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchApplications.fulfilled, (state, action) => {
+                state.applications = action.payload;
+            })
+            .addCase(saveApplication.fulfilled, (state, action) => {
+                state.applications.push(action.payload);
+            });
+    },
 });
 
 export const { setToken, addApplication } = userSlice.actions;
+
 export default userSlice.reducer;

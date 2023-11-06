@@ -1,0 +1,51 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.horizontal-container {
+    height: calc(100vh - 74px);
+    display: flex;
+}
+
+.half-screen-div {
+    flex: 1;
+    background-color: #adadad;
+}
+
+.dashboard-section-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    margin: 10px;
+}
+
+.thirty-percent-height {
+    height: calc(30% - 30px);
+}
+
+.seventy-percent-height{
+    height: calc(70% - 30px);
+}
+
+.fifty-percent-height {
+    height: calc(50% - 30px);
+}
+
+.dashboard-title-text {
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dashboard-body-text {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.bold-text {
+    font-weight: bold;
+}

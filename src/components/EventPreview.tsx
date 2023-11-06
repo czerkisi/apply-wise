@@ -1,5 +1,6 @@
 import React from "react";
 import {Event} from "../Redux/Slices/userSlice";
+import './styles/EventPreview.css';
 
 interface MessageProps {
     event: Event;
@@ -8,7 +9,7 @@ interface MessageProps {
 export default function EventPreview(props: MessageProps){
     const event = props.event;
     const formatTimestamp = (timestamp: number) => {
-        const date = new Date(timestamp * 1000); // Convert to milliseconds
+        const date = new Date(timestamp * 60 * 60 * 24 * 1000); // Convert to milliseconds
         return date.toDateString();
     };
 
