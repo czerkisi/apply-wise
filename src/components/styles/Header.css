@@ -1,0 +1,53 @@
+.header {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo img {
+    width: auto;
+    height: 50px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-icon {
+    margin-left: 20px;
+    height: 30px;
+    width: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-icon img {
+    max-height: 100%;
+    width: auto;
+}
+
+/* Tooltip */
+.navbar-icon:hover::before {
+    content: attr(title);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in;
+}
+
+.navbar-icon:hover::before {
+    opacity: 1;
+    pointer-events: auto;
+}
